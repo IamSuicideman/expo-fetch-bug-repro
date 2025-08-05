@@ -61,6 +61,14 @@ The following steps have been taken, none of which resolved the issue, proving t
 - Changed the PC's DNS server to Google's public DNS (8.8.8.8).
 - Attempted to use Expo's `--tunnel` mode, which also failed to connect, further indicating a fundamental network block.
 
+## Suspected Cause: The "Happy Eyeballs" IPv6 Bug
+
+Based on the symptoms (indefinite hang, sudden onset, framework-level reproducibility), we strongly suspect this is the well-known React Native "Happy Eyeballs" bug on Android. 
+
+Our diagnosis aligns perfectly with the numerous reports in the official React Native repository, particularly **[Issue #32730](https://github.com/facebook/react-native/issues/32730)**.
+
+The bug occurs when React Native's networking layer attempts to connect via a faulty or incomplete IPv6 route provided by the network, causing the `fetch` request to hang forever instead of falling back to the working IPv4 route.
+
 ## Conclusion
 
 This appears to be a critical, high-severity bug in the Expo SDK's native networking layer for Android or a related dependency. The fact that it is reproducible in a blank project and persists across all build types and environments suggests a regression was introduced recently. The issue is completely blocking all network-dependent app development.
