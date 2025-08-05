@@ -2,7 +2,9 @@
 
 ## Summary
 
-All network requests made via the global `fetch` API hang indefinitely without returning a response or an error. This occurs in all environments, including Expo Go, EAS Development Client builds, and even standalone EAS Production builds. The issue is 100% reproducible on a brand new, blank project created with `yarn create expo-app`.
+All network requests made via the global `fetch` API hang indefinitely without returning a response or an error. This occurs in all environments, including Expo Go, EAS Development Client builds, and even standalone EAS Production builds.
+
+**This bug was originally discovered in a large, complex production application.** This repository contains a minimal reproducible example created to isolate and confirm the issue, proving it is not caused by application-specific code or dependencies.
 
 The problem started occurring suddenly about a week ago after previously working correctly.
 
